@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Authors>greatalazar</Authors>
+    <LangVersion>10</LangVersion>
+    <Company>greatalazar</Company>
+    <Copyright>Copyright © greatalazar 2022</Copyright>
+    
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Product>$(SolutionName)</Product>
+
+    <ImplicitUsings>true</ImplicitUsings>
+     
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+</Project>

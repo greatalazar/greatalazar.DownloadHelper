@@ -1,0 +1,13 @@
+{
+  "sdk": {
+    "version": "6.0.100",
+    "rollForward": "latestMajor"
+  },
+  "tools": {
+    "dotnet": "6.0.100",
+    "rollForward": "latestMinor"
+  },
+  "msbuild-sdks": {
+    "Microsoft.Build.NoTargets": "3.3.0"
+  }
+}
