@@ -12,15 +12,12 @@ public static class DownloadFileHelper
 	public static async Task MergeDownloadRangeFile(this DownloadRange mainRange,
 		DownloadRange rangeToBeMerged, int bufferSize = 1024 * 1024 * 8)
 	{
-		using (FileStream mainfs = new(mainRange.TempFilePath, FileMode.Open))
-		{
-			using (FileStream fsToBeMerged = new(rangeToBeMerged.TempFilePath, FileMode.Open))
-			{
-				mainfs.SetLength(mainRange.Length + rangeToBeMerged.Length);
-				mainfs.Position = rangeToBeMerged.From;
-				await fsToBeMerged.CopyToAsync(mainfs, bufferSize);
-				await fsToBeMerged.FlushAsync();
-			}
-		}
+		using FileStream mainfs = new(mainRange.TempFilePath, FileMode.Open);
+		using FileStream fsToBeMerged = new(rangeToBeMerged.TempFilePath, FileMode.Open);
+		
+		mainfs.SetLength(mainRange.Length + rangeToBeMerged.Length);
+		mainfs.Position = rangeToBeMerged.From;
+		await fsToBeMerged.CopyToAsync(mainfs, bufferSize);
+		await fsToBeMerged.FlushAsync();
 	}
 }
