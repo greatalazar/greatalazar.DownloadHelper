@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Authors>greatalazar</Authors>
-    <LangVersion>10</LangVersion>
-    <Company>greatalazar</Company>
-    <Copyright>Copyright © greatalazar 2022</Copyright>
-    
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <Product>$(SolutionName)</Product>
+	<PropertyGroup>
+		<ImplicitUsings>true</ImplicitUsings>
+		<LangVersion>10</LangVersion>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 
-    <ImplicitUsings>true</ImplicitUsings>
-     
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <PublishTrimmed>false</PublishTrimmed>
-  </PropertyGroup>
+		<Product>$(SolutionName)</Product>
+		<Authors>greatalazar</Authors>
+		<Company>greatalazar</Company>
+		<Copyright>Copyright © greatalazar 2022</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/greatalazar/greatalazar.DownloadHelper</RepositoryUrl>
+	</PropertyGroup>
 </Project>
