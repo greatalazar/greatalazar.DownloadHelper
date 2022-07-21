@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Headers;
 
 namespace greatalazar.DownloadHelper;
@@ -207,9 +206,6 @@ public class MultiPartDownload
 
 		_httpClientHandler = new HttpClientHandler();
 
-		if (Debugger.IsAttached)
-			_httpClientHandler.Proxy = new WebProxy("localhost", 8888);
-
 		if (CookieContainer == null) CookieContainer = new CookieContainer();
 		_httpClientHandler.CookieContainer = CookieContainer;
 		_httpClientHandler.UseCookies = true;
@@ -252,10 +248,18 @@ public class MultiPartDownload
 			else
 				Length = 0;
 
-			if (hRepm.Content.Headers.ContentDisposition != null && string.IsNullOrEmpty(hRepm.Content.Headers.ContentDisposition.FileName))
-				DestinationFileName = hRepm.Content.Headers.ContentDisposition.FileName;
+			if (hRepm.Content.Headers.ContentDisposition != null)
+			{
+				//TODO: check file name for invalid chars and add test
+				if (!string.IsNullOrEmpty(hRepm.Content.Headers.ContentDisposition.FileName))
+					DestinationFileName = hRepm.Content.Headers.ContentDisposition.FileName;
+				else if (!string.IsNullOrEmpty(hRepm.Content.Headers.ContentDisposition.FileNameStar))
+					DestinationFileName = hRepm.Content.Headers.ContentDisposition.FileNameStar;
+			}
 			else
 			{
+				//HACK: this could lead to unforseen errors
+				//TODO: cover this in test
 				try
 				{
 					DestinationFileName = Uri.UnescapeDataString(Uri.Segments.Last());
@@ -281,7 +285,7 @@ public class MultiPartDownload
 
 				throw new UnauthorizedAccessException();
 			}
-			//TODO: edit this to StatusCode >= 300 & StatusCode <= 399
+			//TODO: update this to StatusCode >= 300 & StatusCode <= 399
 			else if (hRepm.StatusCode == HttpStatusCode.Redirect
 				|| hRepm.StatusCode == HttpStatusCode.RedirectKeepVerb
 				|| hRepm.StatusCode == HttpStatusCode.TemporaryRedirect
